@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+    branches:
+    - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ 11, 17 ]
+    name: Java ${{ matrix.java }}
+    
+    steps:
+    - name: Checkout (including submodules)
+      uses: actions/checkout@v2
+      with:
+        submodules: recursive
+
+    - name: Set up JDK
+      uses: actions/setup-java@v2
+      with:
+        distribution: 'temurin'
+        java-version: ${{ matrix.java }}
+        cache: 'gradle'
+
+    - name: Build
+      run: ./gradlew build

@@ -1,0 +1,18 @@
+project.description = 'Vividus automated tests for LumaHealth'
+group = 'net.lumahealth'
+
+ext.buildSystemPath = "${System.env.VIVIDUS_BUILD_SYSTEM_HOME?:buildSystemRootDir}/${buildSystemVersion}"
+ext.buildSystemDir = file("${buildSystemPath}")
+
+apply from: "${buildSystemPath}/vividus-test-project.gradle"
+
+ext {
+    vividusVersion = '0.3.12'
+}
+
+dependencies {
+    implementation(group: 'org.vividus', name: 'vividus', version: vividusVersion)
+    implementation(group: 'org.vividus', name: 'vividus-plugin-web-app', version: vividusVersion)
+    implementation(group: 'org.vividus', name: 'vividus-plugin-rest-api', version: vividusVersion)
+    implementation(group: 'org.vividus', name: 'vividus-plugin-visual', version: vividusVersion)
+}
