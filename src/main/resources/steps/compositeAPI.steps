@@ -1,0 +1,7 @@
+Composite: Given I request messages for patient with id '$patientIdVar' and access token '$accessTokenVar'
+When I set request headers:
+|name                   |value                    |
+|Content-Type           |application/json         |
+|x-access-token         |Bearer <accessTokenVar>  |
+When I issue a HTTP GET request for a resource with the URL '${baseApiUrl}/messages?patient=<patientIdVar>'
+Then the response code is = '200'

@@ -1,0 +1,17 @@
+Composite: Given I log into application with firstName '$firstNameValue' lastName '$lastNameValue' practiceName '$practiceNameValue' phoneNumber '$phoneNumberValue' and parameters '$dataConfiguration'
+When I enter `<firstNameValue>` in field located `xpath(//*[@id='firstname'])`
+When I enter `<lastNameValue>` in field located `xpath(//*[@id='lastname'])`
+When I enter `<practiceNameValue>` in field located `xpath(//*[@id='name'])`
+When I enter `<phoneNumberValue>` in field located `xpath(//*[@id='telephone'])`
+When I clear field located `xpath(//*[@id='resourceLimits'])`
+When I enter `
+<dataConfiguration>
+` in field located `xpath(//*[@id='resourceLimits'])`
+When I click on element located `xpath(//*[@type='submit'])`
+When I wait until element located `xpath(//*[contains(text(),'Hub')])` appears
+
+
+Composite: When I save access token from application storage to $scope variable '$accessTokenVar'
+When I save local storage item with key `lh:auth_user` to <scope> variable `<accessTokenVar>`
+When I save JSON element from `${<accessTokenVar>}` by JSON path `$.token` to <scope> variable `<accessTokenVar>`
+When I initialize the <scope> variable `<accessTokenVar>` with value `#{removeWrappingDoubleQuotes(${<accessTokenVar>})}`
