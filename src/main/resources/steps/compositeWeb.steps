@@ -15,3 +15,13 @@ Composite: When I save access token from application storage to $scope variable 
 When I save local storage item with key `lh:auth_user` to <scope> variable `<accessTokenVar>`
 When I save JSON element from `${<accessTokenVar>}` by JSON path `$.token` to <scope> variable `<accessTokenVar>`
 When I initialize the <scope> variable `<accessTokenVar>` with value `#{removeWrappingDoubleQuotes(${<accessTokenVar>})}`
+
+
+Composite: When I use magic button `$magicButtonName` for the current patient
+When I open URL `https://api.lumahealthdemo.com/api/demoUsers/${oppid}/messages/<magicButtonName>` in new window
+When I wait until the page has the title 'Luma Health Magic Buttons'
+When I change context to element located `xpath(//h4)`
+When I save text of context element to SCENARIO variable `magicButtonMessage`
+When I reset context
+Then `${magicButtonMessage}` matches `Thanks you! Your magic request to send <magicButtonName> to demo patient .* has been processed.`
+When I close the current window
