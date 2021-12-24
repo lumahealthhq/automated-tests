@@ -5,3 +5,25 @@ When I set request headers:
 |x-access-token         |Bearer <accessTokenVar>  |
 When I issue a HTTP GET request for a resource with the URL '${baseApiUrl}/messages?patient=<patientIdVar>'
 Then the response code is = '200'
+
+
+Composite: Given I reply on message with id '$messageIdvar' with text '$textVar' as patient with phoneNumber '$patientPhoneNumberVar' to recipient with phoneNumber '$recipientPhoneNumberVar'
+When I set request headers:
+|name                   |value                                              |
+|Content-Type           |application/json                                   |
+Given request body:
+[
+{
+    "message": {
+        "from": "<patientPhoneNumberVar>",
+        "to":["<recipientPhoneNumberVar>"],
+        "text":"<textVar>",
+        "id":"<messageIdvar>",
+        "type": "inbound",
+        "direction": "inbound-api",
+        "time":""
+    }
+}
+]
+When I issue a HTTP POST request for a resource with the URL '${baseWebhookUrl}/webhooks/reply/bandwidth/sms'
+Then the response code is equal to '200'

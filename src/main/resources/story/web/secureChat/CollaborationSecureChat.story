@@ -14,7 +14,7 @@ Given I am on the main application page
 Scenario: Log into application (Step 2)
 Meta:
     @severity 1
-When I initialize the STORY variable `phoneNumber` with value `+16802#{generate(regexify '[0-9]{6}')}`
+When I initialize the STORY variable `phoneNumber` with value `#{${dummyPhoneNumbersVariety1}}`
 Given I log into application with firstName '#{generate(name.firstName)}' lastName '#{generate(name.lastName)}' practiceName '#{generate(regexify '[a-zA-Z0-9]{5}')}' phoneNumber '${phoneNumber}' and parameters '#{loadResource(/templates/minimumInitialDataConfiguration.json)}'
 
 
@@ -47,7 +47,7 @@ When I initialize the STORY variable `patientLastName` with value `#{generate(na
 When I enter `${patientFirstName}` in field located `xpath(//*[@placeholder='First Name'])`
 When I enter `${patientLastName}` in field located `xpath(//*[@placeholder='Last Name'])`
 When I enter `#{generateDate(-P30Y, MM/dd/yyyy)}` in field located `xpath(//*[@placeholder='mm/dd/yyyy'])`
-When I initialize the SCENARIO variable `patinetPhone` with value `+1725217#{generate(regexify '[0-9]{4}')}`
+When I initialize the SCENARIO variable `patinetPhone` with value `#{${dummyPhoneNumbersVariety2}}`
 When I enter `#{replaceFirstByRegExp((..)(.*), $2, ${patinetPhone})}` in field located `xpath(//*[@type='tel'])`
 When I click on element located `xpath(//*[@form='formHubAddPatient'])`
 When I wait until element located `xpath(//*[@name='messageInput'])` appears
@@ -85,7 +85,7 @@ When I click on element located `xpath(//*[@type='submit'])`
 Scenario: Send any message to patient (Step 11-12)
 Meta:
     @severity 1
-When I initialize the STORY variable `patientId` with value `#{replaceAllByRegExp((https://next.lumahealthdemo.com/patients/)(.*)(/.*), $2, ${current-page-url})}`
+When I initialize the STORY variable `patientId` with value `#{replaceAllByRegExp((${baseApplicationUrl}/patients/)(.*)(/.*), $2, ${current-page-url})}`
 When I wait until element located `xpath(//*[contains(text(),'Internal message')])` appears
 When I click on element located `xpath(//*[contains(text(),'Internal message')])`
 When I click on element located `xpath(//*[@data-lh-id='ChatInput-btn-secure'])`
