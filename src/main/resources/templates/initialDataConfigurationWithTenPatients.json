@@ -1,0 +1,14 @@
+{
+    "patients": 10,
+    "providers": 1,
+    "facilities": 1,
+    "availabilities": 10,
+    "additionalAvailabilities": 5,
+    "waitlists": 25,
+    "chatActivities": 8,
+    "referrals": 6,
+    "outboundReferrals": 2,
+    "additionalAppointments": 1,
+    "broadcasts": 3,
+    "subaccounts": 6
+}
