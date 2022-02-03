@@ -84,7 +84,7 @@ When I change context to element located `xpath(//*[@data-lh-id='header-user-men
 When I save text of context element to STORY variable `providerName`
 When I reset context
 
-    
+
 Scenario: Click the 'Join Session' button for your patient's telehealth appointment (Step 8)
 Meta:
     @severity 1
@@ -96,19 +96,19 @@ When I wait until element located `xpath(//*[contains(text(), '${firstName}')])`
 Then the text '${firstName} ${lastName}' exists
 Then the text 'In order to access the telehealth session, you must allow access to your microphone and camera.' exists
 
-    
+
 Scenario: Click the 'Allow microphone and camera' button (Step 9)
 Meta:
     @severity 1
 When I click on element located `xpath(//*[contains(text(), 'Allow microphone and camera')])`
 When I wait until element located `xpath(//button/*[contains(text(), 'Join Now')])` appears
 Then field located `xpath(//video[@playsinline])` exists
-    
-    
+
+
 Scenario: Click the 'Join Now' button (Step 10)
 Meta:
     @severity 1
-When I click on element located `xpath(//button/*[contains(text(), 'Join Now')])`    
+When I click on element located `xpath(//button/*[contains(text(), 'Join Now')])`
 When I wait until element located `xpath(//*[@data-lh-id='ScreenButton']/parent::div)` appears
 Then field located `xpath(//*[@id='telehealth-container'])` exists
 Then field located `xpath(//video[@playsinline])` exists
