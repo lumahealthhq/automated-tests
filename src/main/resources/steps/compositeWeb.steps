@@ -25,3 +25,30 @@ When I save text of context element to SCENARIO variable `magicButtonMessage`
 When I reset context
 Then `${magicButtonMessage}` matches `Thanks you! Your magic request to send <magicButtonName> to demo patient .* has been processed.`
 When I close the current window
+
+
+Composite: When I add new patient with firstname `$patientFirstName` lastname `$patientLastName` DOB `$dateOfBirth` phoneNumber '$patinetPhone' and phoneType '$patientPhoneType'
+When I enter `<patientFirstName>` in field located `By.xpath(//input[@name='firstname'])`
+When I enter `<patientLastName>` in field located `By.xpath(//input[@name='lastname'])`
+When I enter `<dateOfBirth>` in field located `By.xpath(//input[@name='dateOfBirth'])`
+When I enter `#{replaceFirstByRegExp((..)(.*), $2, <patinetPhone>)}` in field located `By.xpath(//input[@type='tel'])`
+When I click on element located `By.xpath(//div[@class='Select-control'][contains(., 'SMS')])`
+When I click on element located `By.xpath(//div[@role='menuitem'][contains(., '<patientPhoneType>')])`
+When I click on element located `By.xpath(//button[contains(., 'Save')])`
+Then the page with the URL containing 'patients' is loaded
+
+
+Composite: When I resave phoneType `$newPhoneType` for the patient
+When I click on element located `By.xpath(//div[contains(., 'Active?')]/following::div[@class='Select-control'])`
+When I click on element located `By.xpath(//div[@role='menuitem'][contains(., '<newPhoneType>')])`
+When I find <= `1` elements by `By.xpath(//button[contains(., 'Save') and @disabled])` and for each element do
+|step|
+|When I click on element located `By.xpath(//button[contains(., 'Cancel')])`|
+|When I reset context                                                       |
+When I find <= `1` elements by `By.xpath(//button[contains(., 'Save')][not(@disabled)])` and for each element do
+|step|
+|When I click on element located `By.xpath(//button[contains(., 'Save')])`                                                                   |
+|When I reset context                                                                                                                        |
+|When I wait until element located `By.xpath(//*[@class='notifications-wrapper'][contains(., 'Patient saved successfully!')])` appears       |
+|Then number of elements found by `By.xpath(//*[@class='notifications-wrapper'][contains(., 'Patient saved successfully!')])` is equal to `1`|
+When I wait until element located `By.xpath(//*[@data-lh-id='chat-tab-item'])` appears

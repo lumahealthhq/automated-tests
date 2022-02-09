@@ -1,7 +1,7 @@
 {
     "patients": 10,
     "providers": 1,
-    "facilities": 1,
+    "facilities": 5,
     "availabilities": 10,
     "additionalAvailabilities": 5,
     "waitlists": 25,

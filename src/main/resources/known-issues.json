@@ -1,2 +1,9 @@
 {
+    "TCID-38-BUG": {
+        "type": "Internal",
+        "assertionPattern": ".*Number of elements found by ' XPath:.*Visibility: VISIBLE;' is equal to 0 \\[Expected: number of elements is a value equal to <0> Actual: .*\\]",
+        "storyPattern":".*FollowupViaFAXInScheduledStatusSMS.*",
+        "scenarioPattern": ".*Click 'YES, SCHEDULE' button.*",
+        "stepPattern": ".*Then number of elements found by .* is.*"
+    }
 }
