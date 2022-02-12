@@ -52,3 +52,10 @@ When I find <= `1` elements by `By.xpath(//button[contains(., 'Save')][not(@disa
 |When I wait until element located `By.xpath(//*[@class='notifications-wrapper'][contains(., 'Patient saved successfully!')])` appears       |
 |Then number of elements found by `By.xpath(//*[@class='notifications-wrapper'][contains(., 'Patient saved successfully!')])` is equal to `1`|
 When I wait until element located `By.xpath(//*[@data-lh-id='chat-tab-item'])` appears
+
+
+Composite: When I save user id to $scope variable '$userVar'
+When I go to the relative URL '/v2/settings/home/my-account'
+When I wait until element located `xpath(//*[contains(text(), 'Luma Health ID')]/following-sibling::p)` appears
+When I change context to element located `xpath(//*[contains(text(), 'Luma Health ID')]/following-sibling::p)`
+When I save text of context element to <scope> variable `<userVar>`
