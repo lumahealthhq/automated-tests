@@ -27,3 +27,50 @@ Given request body:
 ]
 When I issue a HTTP POST request for a resource with the URL '${baseWebhookUrl}/webhooks/reply/bandwidth/sms'
 Then the response code is equal to '200'
+
+
+Composite: Given I request created patient id with last name '$lastNameVar' and access token '$accessTokenVar'
+When I set request headers:
+|name                   |value                    |
+|Content-Type           |application/json         |
+|x-access-token         |Bearer <accessTokenVar>  |
+When I issue a HTTP GET request for a resource with the URL '${baseApiUrl}/patients/search?type=name&value=<lastNameVar>&scope=patient'
+Then the response code is = '200'
+
+
+Composite: Given I create appointment with facility '$facilityVar' and provider '$providerVar' for patient '$patientVar' and user '$userVar' and access token '$accessTokenVar'
+When I set request headers:
+|name            |value                                                                                                                   |
+|Content-Type    |application/json                                                                                                        |
+|x-access-token  |Bearer <accessTokenVar>                                                                                                 |
+Given request body:
+{
+"facility": "<facilityVar>",
+"provider": "<providerVar>",
+"status": "unconfirmed",
+"source": "manual",
+"duration": "15",
+"user": "<userVar>",
+"patient": "<patientVar>",
+"date": "#{generateDate(P2D)}T14:00:00.000Z"
+}
+When I issue a HTTP POST request for a resource with the URL '${baseApiUrl}/appointments'
+Then the response code is equal to '200'
+
+
+Composite: Given I request facility with name '$facilityVar' and access token '$accessTokenVar'
+When I set request headers:
+|name                   |value                    |
+|Content-Type           |application/json         |
+|x-access-token         |Bearer <accessTokenVar>  |
+When I issue a HTTP GET request for a resource with the URL '${baseApiUrl}/facilities/search?name=<facilityVar>'
+Then the response code is = '200'
+
+
+Composite: Given I request provider with name '$providerVar' and access token '$accessTokenVar'
+When I set request headers:
+|name                   |value                    |
+|Content-Type           |application/json         |
+|x-access-token         |Bearer <accessTokenVar>  |
+When I issue a HTTP GET request for a resource with the URL '${baseApiUrl}/providers/search?name=<providerVar>'
+Then the response code is = '200'
