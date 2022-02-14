@@ -16,4 +16,6 @@ output/
 .out/**
 
 # VIVIDUS overriding settings
-overriding.properties
+**/overriding.properties
+/.metadata/
+.temp*

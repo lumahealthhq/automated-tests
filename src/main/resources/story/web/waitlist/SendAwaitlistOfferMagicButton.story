@@ -8,9 +8,7 @@ Meta:
 Scenario: Open main application page (Step 1)
 Meta:
     @severity 1
-When I initialize the STORY variable `oppidVariable` with value `#{${randomOppid}}`
-Given I am on a page with the URL '${mainPageUrl}${oppidVariable}'
-When I refresh the page
+Given I am on the main application page
 
 
 Scenario: Log into application (Step 2)
@@ -31,13 +29,7 @@ When I wait until element located `xpath(//*[@name='messageInput'])` appears
 When I click on element located `xpath(//*[@role='button']//*[contains(text(),'${lastName}')])`
 When I initialize the STORY variable `patientId` with value `#{replaceAllByRegExp((.*patient=)(.*), $2, ${current-page-url})}`
 Given I am on a page with the URL '${baseApplicationUrl}/patients/${patientId}/chat'
-When I open URL `${baseApiUrl}/demoUsers/${oppidVariable}/messages/patientApptOffer` in new window
-When I wait until the page has the title 'Luma Health Magic Buttons'
-When I change context to element located `xpath(//h4)`
-When I save text of context element to SCENARIO variable `magicButtonMessage`
-When I reset context
-Then `${magicButtonMessage}` matches `Thanks you! Your magic request to send patientApptOffer .* has been processed.`
-When I close the current window
+When I use magic button `patientApptOffer` for the current patient
 When I switch to window with title that CONTAINS `Luma Health`
 When I wait until element located `xpath(//*[contains(text(),'This confirms')])` appears
 When I change context to element located `xpath(//*[contains(text(),'This confirms')])`
@@ -68,7 +60,7 @@ When I save text of context element to SCENARIO variable `offerMessage`
 When I reset context
 Then `${offerMessage}` matches `Thanks. We're checking with the front office and will send you another message when confirmed.`
 Given I request messages for patient with id '${patientId}' and access token '${accessToken}'
-Then JSON element by JSON path `$..text` is equal to `["${offerMessage}"]`IGNORING_ARRAY_ORDER,IGNORING_EXTRA_ARRAY_ITEMS
+Then JSON element by JSON path `$..text` is equal to `["Thanks. We're checking with the front office and will send you another message when confirmed."]`IGNORING_ARRAY_ORDER,IGNORING_EXTRA_ARRAY_ITEMS
 
 
 Scenario: Click 'Waitlist' from the left navigation menu (Step 5)
