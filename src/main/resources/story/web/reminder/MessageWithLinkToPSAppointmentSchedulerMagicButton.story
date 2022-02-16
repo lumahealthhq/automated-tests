@@ -111,7 +111,7 @@ When I reset context
 When I initialize the STORY variable `timeConfirmation` with value `#{replaceAllByRegExp((\d+:\d+).*, $1, ${newTime})}`
 When I initialize the STORY variable `dayTimeConfirmation` with value `#{replaceAllByRegExp(\d+:\d+(\w+), $1, ${newTime})}`
 When I click on element located `xpath((//ul/descendant::*[contains(text(), 'Barton DemoClinton')]/parent::div/following-sibling::div/button)[1])`
-When I wait until element located `xpath(//*[contains(text(), 'Review and book')]/parent::div/div/descendant::*[contains(text(), 'SEND APPOINTMENT REQUEST')])` appears
+When I wait until element located `xpath(//*[contains(text(), 'Submit Request')])` appears
 Then field located `xpath(//*[contains(text(),'${timeConfirmation} ${dayTimeConfirmation}')])` exists
 Then field located `xpath(//*[contains(text(), 'Facility')]/following-sibling::p[contains(text(), '${facilityNameVariable1}')])` exists
 Then field located `xpath(//*[contains(text(), 'Provider')]/following-sibling::p[contains(text(), 'Barton DemoClinton')])` exists
@@ -120,10 +120,9 @@ Then field located `xpath(//*[contains(text(), 'Provider')]/following-sibling::p
 Scenario: Click the "Send appointment request" button and verify the patient receives the message (Step 13)
 Meta:
     @severity 1
-When I click on element located `xpath(//*[contains(text(), 'Review and book')]/parent::div/div/descendant::*[contains(text(), 'SEND APPOINTMENT REQUEST')])`
-When I wait until element located `xpath(//*[contains(text(), 'Your appointment time is reserved')])` appears
-Then the text 'Your appointment time is reserved' exists
-Then the text 'but not confirmed' exists
+When I click on element located `xpath(//*[contains(text(), 'Submit Request')])`
+When I wait until element located `xpath(//*[contains(text(), 'Pending Appointment')])` appears
+Then the text 'Got it! We'll let you know when your appointment is confirmed' exists
 When I close the current window
 When I switch to window with title that CONTAINS `Luma Health`
 When I wait until element located `xpath(//*[contains(text(),'hecking with the front')])` appears
