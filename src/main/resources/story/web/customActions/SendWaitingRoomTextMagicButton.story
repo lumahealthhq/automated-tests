@@ -56,7 +56,7 @@ Meta:
 When I click on element located `xpath(//*[contains(text(),'Waiting Room')])`
 When I wait until element located `xpath(//*[contains(text(),'Waiting room for Today')])` appears
 Then the text 'Waiting room for Today' exists
-When I wait until element located `xpath(//*[contains(text(),'0 Patients have checked in')])` disappears
+When I wait until element located `xpath(//*[contains(text(),'0 Patients have checked in')])` appears
 Then field located `xpath(//*[contains(text(),'${firstName} ${lastName}')])` does not exist
 
 
@@ -70,7 +70,7 @@ When I save JSON element from context by JSON path `$[0].externalId.value` to SC
 When I initialize the SCENARIO variable `messageId` with value `#{removeWrappingDoubleQuotes(${messageId})}`
 Given I reply on message with id '${messageId}' with text 'arrived' as patient with phoneNumber '${phoneNumber}' to recipient with phoneNumber '${fromPhoneNumber}'
 Given I am on a page with the URL '${baseApplicationUrl}/patients/${patientId}/chat'
-When I wait until element located `xpath(//*[contains(text(),'Thanks')])` appears
+When I wait until element located `xpath(//*[contains(text(),'Thanks for letting us know')])` appears
 Then the text 'Thanks for letting us know, we'll begin the check-in process shortly.' exists
 Given I request messages for patient with id '${patientId}' and access token '${accessToken}'
 Then the response body contains 'Thanks for letting us know, we'll begin the check-in process shortly.'
@@ -83,7 +83,9 @@ When I click on element located `xpath(//*[contains(text(),'Schedule')])`
 When I wait until element located `xpath(//*[contains(text(),'Waiting Room')])` appears
 When I click on element located `xpath(//*[contains(text(),'Waiting Room')])`
 When I wait until element located `xpath(//*[contains(text(),'Waiting room for Today')])` appears
-When I wait until element located `xpath(//*[contains(text(),'0 Patients have checked in')])` disappears
+When I refresh the page
+When I wait until element located `xpath(//*[contains(text(),'Waiting room for Today')])` appears
+When I wait until element located `xpath(//*[contains(text(),'0 Patients have arrived')])` disappears
 Then field located `xpath(//*[contains(text(),'${firstName} ${lastName}')])` exists
 
 

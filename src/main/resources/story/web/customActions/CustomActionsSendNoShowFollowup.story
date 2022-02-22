@@ -29,11 +29,11 @@ When I click on element located `xpath(//*[contains(text(),'Hub')])`
 When I wait until element located `xpath(//*[@name='messageInput'])` appears
 When I click on element located `xpath(//*[@role='button']//*[contains(text(),'${lastName}')])`
 When I initialize the STORY variable `patientId` with value `#{replaceAllByRegExp((.*patient=)(.*), $2, ${current-page-url})}`
+When I initialize the SCENARIO variable `dateVariable` with value `#{generateDate(P, MMM dd'th,' h:mm)} am`
 Given I am on a page with the URL '${baseApplicationUrl}/patients/${patientId}/chat'
 When I open URL `${baseApiUrl}/demoUsers/${oppid}/messages/customActionNoShowFollowup` in new window
 When I close the current window
 When I switch to window with title that CONTAINS `Luma Health`
-When I initialize the SCENARIO variable `dateVariable` with value `#{generateDate(P, MMM dd'th,' h:mm)} am`
 When I wait until element located `xpath(//*[contains(text(),'Hi ${firstName}, this is')])` appears
 When I click on element located `By.xpath(//*[contains(., 'Activity Feed')][contains(@id, 'menu-option')])`
 When I wait until element located `By.xpath(//*[contains(text(), 'Welcome to Luma Health')])` appears
@@ -43,8 +43,9 @@ When I refresh the page
 When I wait until element located `xpath(//*[@name='messageInput'])` appears
 When I click on element located `xpath(//*[@role='button']//*[contains(text(),'${lastName}')])`
 When I wait until element located `xpath(//*[contains(text(),'Hi ${firstName}, this is')])` appears
-When I wait until element located `xpath(//*[contains(text(),'Hi ${firstName}, this is')])` contains text 'Hi ${firstName}, this is ${facilityNameVariable1}. We're sorry you were unable to make your appointment yesterday'
-When I wait until element located `xpath(//*[contains(text(),'Hi ${firstName}, this is')])` contains text 'If you haven't already, please call ${facilityPhoneVariable1} to reschedule'
+Then number of elements found by `By.xpath(//div[contains(text(),"Hi ${firstName}, this is ${facilityNameVariable1}. We're sorry you were unable to make your appointment yesterday")])` is equal to `1`
+Then number of elements found by `By.xpath(//div[contains(text(),"If you haven't already, please call ${facilityPhoneVariable1} to reschedule")])` is equal to `1`
 When I save access token from application storage to STORY variable 'accessToken'
 Given I request messages for patient with id '${patientId}' and access token '${accessToken}'
-Then JSON element by JSON path `$[0].text` is equal to `"Hi ${firstName}, this is ${facilityNameVariable1}. We're sorry you were unable to make your appointment yesterday on ${dateVariable}. If you haven't already, please call ${facilityPhoneVariable1} to reschedule"`TREATING_NULL_AS_ABSENT
+Then the response body contains 'Hi ${firstName}, this is ${facilityNameVariable1}. We're sorry you were unable to make your appointment yesterday on'
+Then the response body contains 'If you haven't already, please call ${facilityPhoneVariable1} to reschedule'
