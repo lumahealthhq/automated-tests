@@ -26,6 +26,7 @@ When I wait until element located `By.xpath((//*[contains(text(), 'Outbound Refe
 When I click on element located `By.xpath(//*[contains(., 'Waitlists')][contains(@id, 'menu-option')])`
 When I wait until element located `By.xpath((//*[contains(text(), 'waiting')]/following::ul//li)[1])` appears
 
+
 Composite: When I save access token from application storage to $scope variable '$accessTokenVar'
 When I save local storage item with key `lh:auth_user` to <scope> variable `<accessTokenVar>`
 When I save JSON element from `${<accessTokenVar>}` by JSON path `$.token` to <scope> variable `<accessTokenVar>`
