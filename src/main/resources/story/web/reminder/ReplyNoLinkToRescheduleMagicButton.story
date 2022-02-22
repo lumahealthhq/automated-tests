@@ -31,7 +31,7 @@ When I initialize the STORY variable `patientId` with value `#{replaceAllByRegEx
 Given I am on a page with the URL '${baseApplicationUrl}/patients/${patientId}/chat'
 When I use magic button `patientReminderCancellationThanksWithReschedule` for the current patient
 When I switch to window with title that CONTAINS `Luma Health`
-When I wait until element located `xpath(//*[contains(text(),'thanks for the heads up')])` appears
+When I wait until element located `xpath(//*[contains(text(),'Reply YES to confirm or NO to cancel')])` appears
 Then field located `xpath(//*[contains(text(),'NO')])` exists
 When I wait until element located `xpath(//*[contains(text(),'Thank you for cancelling')])` appears
 When I change context to element located `xpath(//*[contains(text(),'Thank you for cancelling')])`

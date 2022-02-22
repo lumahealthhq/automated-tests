@@ -34,6 +34,7 @@ Given I am on a page with the URL '${baseApplicationUrl}/patients/${patientId}/c
 When I open URL `${baseApiUrl}/demoUsers/${oppid}/messages/customActionNoShowFollowup` in new window
 When I close the current window
 When I switch to window with title that CONTAINS `Luma Health`
+When I refresh the page
 When I wait until element located `xpath(//*[contains(text(),'Hi ${firstName}, this is')])` appears
 When I click on element located `By.xpath(//*[contains(., 'Activity Feed')][contains(@id, 'menu-option')])`
 When I wait until element located `By.xpath(//*[contains(text(), 'Welcome to Luma Health')])` appears
